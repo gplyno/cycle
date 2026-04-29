@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Cycle AI Assistant - StarleLab</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="avatar-icon" id="sidebarAvatar">
+                    <img src="icons/avatar.png" alt="Cycle" onerror="this.style.display='none'; this.parentElement.classList.add('fallback')">
+                </div>
+                <span class="sidebar-title">Мои чаты</span>
+            </div>
+            
+            <button class="new-chat-btn" id="newChatBtn">
+                <span class="icon">
+                    <img src="icons/new_chat.png" alt="+" onerror="this.style.display='none'; this.parentElement.innerHTML='➕'">
+                </span>
+                <span>Новый чат</span>
+            </button>
+            
+            <div class="chat-list" id="chatList"></div>
+            
+            <div class="sidebar-footer">
+                <button class="settings-btn" id="settingsBtn">
+                    <span class="icon">
+                        <img src="icons/settings.png" alt="⚙️" onerror="this.style.display='none'; this.parentElement.innerHTML='⚙️'">
+                    </span>
+                    <span>Настройки</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="chat-area">
+            <header class="chat-header">
+                <button class="menu-btn" id="menuBtn">
+                    <span class="icon">
+                        <img src="icons/menu.png" alt="☰" onerror="this.style.display='none'; this.parentElement.innerHTML='☰'">
+                    </span>
+                </button>
+                
+                <div class="header-info">
+                    <div class="avatar-icon small" id="headerAvatar">
+                        <img src="icons/avatar.png" alt="Cycle" onerror="this.style.display='none'; this.parentElement.classList.add('fallback')">
+                    </div>
+                    <div>
+                        <div class="chat-name-header" id="chatNameHeader">Cycle Assistant</div>
+                        <div class="chat-status" id="chatStatus">Готов к работе</div>
+                    </div>
+                </div>
+                
+                <button class="delete-chat-btn" id="deleteChatBtn" title="Удалить чат">
+                    <span class="icon">
+                        <img src="icons/delete.png" alt="🗑️" onerror="this.style.display='none'; this.parentElement.innerHTML='🗑️'">
+                    </span>
+                </button>
+            </header>
+
+            <div class="messages-container" id="messagesContainer"></div>
+
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <button class="attach-btn" id="attachBtn" title="Прикрепить файл">
+                        <span class="icon">
+                            <img src="icons/attach.png" alt="📎" onerror="this.style.display='none'; this.parentElement.innerHTML='📎'">
+                        </span>
+                    </button>
+                    <textarea class="message-input" id="messageInput" placeholder="Напишите сообщение Cycle..." rows="1"></textarea>
+                    <button class="send-btn" id="sendBtn" title="Отправить">
+                        <span class="icon">
+                            <img src="icons/send.png" alt="📤" onerror="this.style.display='none'; this.parentElement.innerHTML='📤'">
+                        </span>
+                    </button>
+                </div>
+                <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                    <span>Cycle обдумывает ответ...</span>
+                    <div class="dot-floating"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="icon">
+                    <img src="icons/settings.png" alt="⚙️" onerror="this.style.display='none'; this.parentElement.innerHTML='⚙️'">
+                </span>
+                <span>Настройки Cycle</span>
+            </div>
+            
+            <div class="setting-row">
+                <label class="setting-label">
+                    <span></span>
+                    Креативность (Температура): 
+                    <span id="tempValue" class="temp-value">0.7</span>
+                </label>
+                <input type="range" id="tempSlider" min="0" max="100" value="70" class="temp-slider">
+                <div class="temp-hint">
+                    <span>Предсказуемо</span>
+                    <span>Креативно</span>
+                </div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" id="cancelSettingsBtn">Отмена</button>
+                <button class="modal-btn modal-btn-save" id="saveSettingsBtn">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="newChatModal" class="modal">
+        <div class="modal-content small">
+            <div class="modal-header">
+                <span class="icon">
+                    <img src="icons/new_chat.png" alt="💬" onerror="this.style.display='none'; this.parentElement.innerHTML='💬'">
+                </span>
+                <span>Новый чат</span>
+            </div>
+            <div class="setting-row">
+                <label class="setting-label">Название чата:</label>
+                <input type="text" id="newChatName" class="modal-input" placeholder="Введите название чата">
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" id="cancelNewChatBtn">Отмена</button>
+                <button class="modal-btn modal-btn-save" id="createNewChatBtn">Создать</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
